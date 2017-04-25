@@ -7,7 +7,7 @@ process.env.NODE_ENV = 'production';
 
 module.exports = {
     context: paths.context,
-    entry: [paths.appIndexJs,  paths.appStyle],
+    entry: [paths.appIndexJs],
     output: {
         path: paths.appBuild,
         filename: 'static/js/[name].bundle.js'
@@ -41,53 +41,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
                     use: [
                         {
                             loader: 'css-loader',
                             options: {
-                                importLoaders: 1
+                                importLoaders: 1,
+                                modules: true,
+                                localIdentName: '[name]__[local]__[hash:base64:5]'
                             }
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer'),
-                                        require('cssnano')
-                                    ];
-                                }
-                            }
-                        }
-                    ]
-                })
-            },
-            {
-                test: /\.scss$/,
-                loader: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: function () {
-                                    return [
-                                        require('autoprefixer'),
-                                        require('cssnano')
-                                    ];
-                                }
-                            }
-                        },
-                        'sass-loader'
-                    ]
+                        'postcss-loader']
                 })
             }
         ],
@@ -110,7 +75,20 @@ module.exports = {
                 minifyURLs: true
             }
         }),
-        new ExtractTextPlugin('static/css/[name].css'),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [
+                    require('postcss-import'),
+                    require('postcss-mixins'),
+                    require('postcss-nested'),
+                    require('postcss-cssnext'),
+                ],
+            },
+        }),        
+        new ExtractTextPlugin({
+            filename: 'static/css/main.css',
+            allChunks: true
+        }), 
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             filename: 'static/js/vendor.js',

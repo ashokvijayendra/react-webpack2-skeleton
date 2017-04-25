@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+    devtool: 'source-map',
     context: paths.context,
     entry: [
             'react-hot-loader/patch', 
@@ -74,6 +75,10 @@ module.exports = {
                 ],
             },
             {
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+                use: ['file']
+            },            
+            {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
@@ -85,16 +90,27 @@ module.exports = {
                                 modules: true,
                                 localIdentName: '[name]__[local]__[hash:base64:5]'
                             }
-                        }]
+                        },
+                        'postcss-loader']
                 })
             }
         ],
     },
     plugins: [
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }),
+        new webpack.LoaderOptionsPlugin({
+            options: {
+                postcss: [
+                    require('postcss-import'),
+                    require('postcss-mixins'),
+                    require('postcss-nested'),
+                    require('postcss-cssnext'),
+                ],
+            },
+        }),         
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new ExtractTextPlugin('statics/css/main.css'),
+        new ExtractTextPlugin('static/css/main.css'),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             inject: true,
