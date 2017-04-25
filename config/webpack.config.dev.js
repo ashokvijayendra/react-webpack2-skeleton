@@ -2,6 +2,7 @@ const path = require('path');
 const paths = require('./paths');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     context: paths.context,
@@ -9,8 +10,7 @@ module.exports = {
             'react-hot-loader/patch', 
             'webpack-dev-server/client?http://0.0.0.0:3000', 
             'webpack/hot/only-dev-server', 
-            paths.appIndexJs,
-            paths.appStyle,
+            paths.appIndexJs
     ],
     output: {
         path: paths.appBuild,
@@ -75,48 +75,18 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: function () {
-                                return [
-                                    require('autoprefixer')
-                                ];
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                                modules: true,
+                                localIdentName: '[name]__[local]__[hash:base64:5]'
                             }
-                        }
-                    }
-                ],
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: function () {
-                                return [
-                                    require('autoprefixer')
-                                ];
-                            }
-                        }
-                    },
-                    'sass-loader'
-                ]
+                        }]
+                })
             }
         ],
     },
@@ -124,6 +94,7 @@ module.exports = {
         new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('statics/css/main.css'),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             inject: true,
