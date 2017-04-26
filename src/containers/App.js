@@ -3,6 +3,7 @@ import Route from 'react-router-dom/Route';
 import Link from 'react-router-dom/Link';
 import { Home, Foo, Bar } from './routes/Routes';
 import { Match } from 'react-router';
+import './App.css';
 
 class App extends Component {
     render() {

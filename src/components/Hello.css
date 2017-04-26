@@ -1,5 +1,6 @@
+@import 'src/styles/main.css';
 .heading {
-  color:red; 
+  color: var(--primary-color);
   background: url('./images/two.jpg');
 } 
 

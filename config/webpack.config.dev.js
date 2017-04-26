@@ -93,7 +93,10 @@ module.exports = {
         new webpack.LoaderOptionsPlugin({
             options: {
                 postcss: [
-                    require('postcss-import'),
+                    require('postcss-import')({
+                        path: process.cwd(),
+                        addDependencyTo: webpack
+                    }),
                     require('postcss-mixins'),
                     require('postcss-nested'),
                     require('postcss-cssnext'),
