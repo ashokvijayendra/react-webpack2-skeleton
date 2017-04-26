@@ -7,13 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux/configureStore';
 import transit from 'transit-immutable-js';
 
-const renderApp = (context, store, location) => ReactDOMServer.renderToString(
-    <Provider store={store}>
-      <StaticRouter location={location} context={context}>
-        <App/>
-      </StaticRouter>
-    </Provider>
-);
+const renderApp = (context, store, location) => ReactDOMServer.renderToString(<Provider store={store}><StaticRouter location={location} context={context}><App/></StaticRouter></Provider>);
 
 const renderPage = (html, preloadedState) => {
   return `
@@ -27,16 +21,14 @@ const renderPage = (html, preloadedState) => {
     </head>
 
     <body>
-        <div id="root">
-          ${html}
-        </div>
+        <div id="root">${html}</div>
           <script>
             // WARNING: See the following for security issues around embedding JSON in HTML:
             // http://redux.js.org/docs/recipes/ServerRendering.html#security-considerations
             window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
         </script>
         <script type="text/javascript" src="static/js/vendor.js"></script>
-        <script type="text/javascript" src="static/js/main.bundle.js"></script>
+        <script type="text/javascript" src="static/js/main.bundle.js"></script> 
     </body>
 
     </html>

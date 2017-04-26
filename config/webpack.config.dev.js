@@ -129,5 +129,5 @@ module.exports = {
         hot: true,
         inline: false,
         historyApiFallback: true
-    },
+    } 
 };

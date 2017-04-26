@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-process.env.NODE_ENV = 'production';
+process.env.NODE_ENV = 'development';
 
 module.exports = {
     context: paths.context,
@@ -94,30 +94,26 @@ module.exports = {
             filename: 'static/js/vendor.js',
             minChunks: 2,
         }),
-        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+        new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-          compress: {
-            screw_ie8: true,
-            warnings: false
-          },
-          mangle: {
-            screw_ie8: true
-          },
-          output: {
-            comments: false,
-            screw_ie8: true
-          }
-        }),
-        new webpack.NormalModuleReplacementPlugin(
-            /^\.\/routes\/Routes$/,
-            './routes/RoutesAsync'
-        )
+        // new webpack.optimize.UglifyJsPlugin({
+        //   compress: {
+        //     screw_ie8: true,
+        //     warnings: false
+        //   },
+        //   mangle: {
+        //     screw_ie8: true
+        //   },
+        //   output: {
+        //     comments: false,
+        //     screw_ie8: true
+        //   }
+        // })
     ],
     resolve: {
         modules: [
             paths.context,
             'node_modules'
         ]
-    }
+    }   
 };

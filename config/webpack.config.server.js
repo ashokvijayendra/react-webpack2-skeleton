@@ -19,7 +19,7 @@ module.exports = {
                     /\.(js|jsx)$/,
                     /\.json$/
                 ],
-                loader: 'ignore',
+                loader: 'ignore-loader',
             },
             {
                 test: /\.js$/,
@@ -30,7 +30,7 @@ module.exports = {
                 }],
             },
         ],
-    },
+    }, 
     resolve: {
         modules: [
             paths.context,

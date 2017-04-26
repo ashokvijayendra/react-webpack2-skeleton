@@ -19,7 +19,6 @@ class Home extends Component {
         return (
             <div>
                 <Hello name="home"/>
-                { JSON.stringify(status.sample.get('result')) }
             </div> 
         )
     }

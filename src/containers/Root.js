@@ -5,7 +5,6 @@ import App from './App';
 import { Provider } from 'react-redux';
 import BrowserRouter from 'react-router-dom/BrowserRouter'
 import configureStore from 'redux/configureStore';
-
 import transit from 'transit-immutable-js';
 
 // deserialize the JSON to Immutable
