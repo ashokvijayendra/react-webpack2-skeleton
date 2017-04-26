@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Route from 'react-router-dom/Route';
 import Link from 'react-router-dom/Link';
-import {Home, Foo, Bar} from './routes/Routes';
+import { Home, Foo, Bar } from './routes/Routes';
 import { Match } from 'react-router';
 
 class App extends Component {

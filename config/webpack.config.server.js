@@ -19,7 +19,7 @@ module.exports = {
                     /\.(js|jsx)$/,
                     /\.json$/
                 ],
-                loader: 'ignore-loader',
+                loader: 'ignore-loader'
             },
             {
                 test: /\.js$/,
@@ -28,7 +28,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: { presets: ['react-app'] }
                 }],
-            },
+            }         
         ],
     }, 
     resolve: {

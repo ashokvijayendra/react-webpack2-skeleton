@@ -4084,7 +4084,7 @@ var Hello = function Hello(_ref) {
     var name = _ref.name;
     return _react2.default.createElement(
         'h1',
-        { className: _Hello2.default.heading, __source: {
+        { className: 'Hello__heading', __source: {
                 fileName: _jsxFileName,
                 lineNumber: 6
             },
