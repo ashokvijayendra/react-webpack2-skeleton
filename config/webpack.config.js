@@ -10,23 +10,11 @@ module.exports = {
     entry: [paths.appIndexJs],
     output: {
         path: paths.appBuild,
-        filename: 'static/js/[name].bundle.js'
+        filename: 'static/js/[name].bundle.js',
+        publicPath: '/'
     },
     module: {
         rules: [
-            {
-                exclude: [
-                    /\.html$/,
-                    /\.(js|jsx)$/,
-                    /\.(css|scss)$/,
-                    /\.json$/
-                ],
-                loader: 'url',
-                query: {
-                    limit: 10000,
-                    name: 'static/media/[name].[hash:8].[ext]'
-                }
-            },
             {
                 test: /\.js$/,
                 exclude: [/node_modules/],
@@ -37,8 +25,13 @@ module.exports = {
             },
             {
                 test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                use: ['file']
-            },
+                use: [{
+                   loader: 'file-loader',
+                   options: {
+                     name: 'static/images/[name].[ext]'
+                   } 
+                }]               
+            }, 
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({

@@ -21,18 +21,14 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [
-                    /\.html$/,
-                    /\.(js|jsx)$/,
-                    /\.(css|scss)$/,
-                    /\.json$/
-                ],
-                loader: 'url',
-                query: {
-                    limit: 10000,
-                    name: 'static/media/[name].[hash:8].[ext]'
-                }
-            },
+                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+                use: [{
+                   loader: 'file-loader',
+                   options: {
+                     name: 'static/images/[name].[ext]'
+                   } 
+                }]               
+            }, 
             {
                 test: /\.js$/,
                 exclude: [/node_modules/],
@@ -73,11 +69,7 @@ module.exports = {
                         }
                     }
                 ],
-            },
-            {
-                test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
-                use: ['file']
-            },            
+            },         
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({

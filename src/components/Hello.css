@@ -1,10 +1,12 @@
 .heading {
   color:red; 
+  background: url('./images/two.jpg');
 } 
 
 .heading {
    &-title {
        color: red;
+    background: url('./images/1.png');
    }
 }
 
