@@ -1,0 +1,27 @@
+@import 'src/styles/main.css';
+.heading {
+  color: var(--primary-color);
+  background: url('./images/two.jpg');
+} 
+
+.heading {
+   &-title {
+       color: red;
+    background: url('./images/1.png');
+   }
+}
+
+.phone {
+    &_title {
+        width: 500px;
+        @media (max-width: 500px) {
+            width: auto;
+        }
+        body.is_dark & {
+            color: white;
+        }
+    }
+    img {
+        display: block;
+    }
+}
