@@ -4,6 +4,7 @@ import { StaticRouter } from 'react-router'
 import App from 'containers/App';
 
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux/configureStore';
 import transit from 'transit-immutable-js';
 

@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import Hello from 'components/Hello';
-import * as sample from 'redux/modules/sample';
+import { addTodo as addTodoAction } from 'redux/reducers/todos';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 
 class Home extends Component {
+
     componentWillMount() {
-        const { SampleActions } = this.props;
-        SampleActions.fetchData({
-            text: 'hello'
+        const { addTodoAction } = this.props;
+        addTodoAction({
+            text: 'hellowhatisthis'
         });
     }
     
@@ -31,6 +31,6 @@ export default connect(
         }
     }),
     dispatch => ({
-        SampleActions: bindActionCreators(sample, dispatch)
+        addTodoAction
     })
 )(Home);
