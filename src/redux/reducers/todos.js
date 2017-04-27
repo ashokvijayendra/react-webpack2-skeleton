@@ -1,23 +1,20 @@
 let nextTodoId = 0;
-export function addTodo(todoText) {  
-    return dispatch => {
-      new Promise(resolve => {
+
+export let  addTodo = (text) => (dispatch) => {
+    return new Promise(resolve => {
             setTimeout(()=>{
-                console.log('resolving action');
-                resolve({
+                resolve(dispatch({
                         type: 'ADD_TODO',
-                        text: todoText,
+                        text: text,
                         id: nextTodoId++
-                }); 
+                })); 
             }, 500);
-      })
-    }
-}
+      })     
+};;
 
 export default function todos(state = [], action) {
   switch (action.type) {
     case 'ADD_TODO':
-      console.log('in Add to Do');
       return state.concat([ action.text ])
     default:
       return state

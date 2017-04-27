@@ -4,7 +4,7 @@ import { createMiddleware } from 'redux-promises';
 const promisesMiddleware = createMiddleware();
 const composeEnhancers = process.browser ? (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose) : compose;
 
-export default function configureStore(initialState) {
+export default function configureStore() {
   const store = applyMiddleware(promisesMiddleware)(createStore)(reducers);
  
   if (module.hot) {
