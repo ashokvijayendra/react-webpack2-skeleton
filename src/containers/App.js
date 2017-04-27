@@ -9,7 +9,7 @@ class App extends Component {
     render() {
         return (<div>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/">Home 1</Link></li>
                         <li><Link to="/foo">Foo</Link></li>
                         <li><Link to="/bar">Bar</Link></li>
                     </ul>

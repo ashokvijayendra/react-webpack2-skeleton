@@ -52,6 +52,7 @@
     "express": "^4.15.0",
     "file-loader": "^0.11.1",
     "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "isomorphic-style-loader": "^2.0.0",
     "postcss-cssnext": "^2.10.0",
     "postcss-import": "^9.1.0",
@@ -64,6 +65,8 @@
     "redux": "^3.6.0",
     "redux-actions": "^1.2.2",
     "redux-promise-middleware": "^4.2.0",
+    "redux-promises": "^1.0.0",
+    "redux-thunk": "^2.2.0",
     "transit-immutable-js": "^0.7.0",
     "transit-js": "^0.8.846"
   }

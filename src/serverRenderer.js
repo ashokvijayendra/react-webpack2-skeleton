@@ -2,8 +2,9 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router'
 import App from 'containers/App';
-
+import { ensureIdleState } from 'redux-promises';
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux/configureStore';
 import transit from 'transit-immutable-js';
 
@@ -45,9 +46,7 @@ const renderer = (req, res, next) => {
 
   const store = configureStore();
   const location = req.url;
-
-  renderApp(context, store, location);
-
+  const html = renderApp(context, store, location);
   // context.url will contain the URL to redirect to if a <Redirect> was used
   if (context.url) {
     res.writeHead(302, {
@@ -55,12 +54,10 @@ const renderer = (req, res, next) => {
     })
     res.end()
   } else {    
-    Promise.all(store.getState().promise).then(
-      () => {
-        // serialize the store, except the promise reducer (transit cannot handle it)
-        store.getState().promise = [];
+    ensureIdleState(store).then(() => {
+        console.log('store.getState()',store.getState())
         var serialized = transit.toJSON(store.getState());
-        res.write(renderPage(renderApp(context, store, location), serialized));
+        res.write(renderPage(html, serialized));
         res.end();
       }
     ).catch(
@@ -70,7 +67,6 @@ const renderer = (req, res, next) => {
         res.end();
       }
     )
-
   }
 }
 
