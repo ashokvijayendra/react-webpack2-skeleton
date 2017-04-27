@@ -62,9 +62,7 @@ module.exports = {
                                 ['transform-regenerator', {
                                     // Async functions are converted to generators by babel-preset-latest
                                     async: false
-                                }],
-                                // react-hot-loader (remember, always put this at the last)
-                                "react-hot-loader/babel"
+                                }]
                             ]
                         }
                     }

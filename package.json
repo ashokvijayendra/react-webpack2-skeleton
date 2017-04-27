@@ -9,7 +9,7 @@
     "start": "nodemon server",
     "build": "rimraf build && webpack --config config/webpack.config.js",
     "build:server": "webpack --config config/webpack.config.server.js",
-    "test": "nyc mocha  src/**/*spec.js --compilers js:babel-register --require ./test/helpers.js --require ./test/dom.js --recursive",
+    "test": "nyc mocha src/**/*spec.js --compilers js:babel-register --require ./test/setup.js --require ./test/helpers.js --require ./test/dom.js --recursive",
     "tdd": "npm test -- --watch",
     "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
   },
