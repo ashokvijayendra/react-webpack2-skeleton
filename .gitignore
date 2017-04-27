@@ -4,3 +4,4 @@ coverage
 build
 .DS_Store
 .nyc_output
+yarn-error.log
